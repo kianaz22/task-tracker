@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { FaPlus } from 'react-icons/fa'
 import AddTask from './AddTask'
 import Task from './Task'
 
@@ -8,17 +9,12 @@ const OpenTasks = ({ tasks, addTask, selectTask, deleteTask }) => {
   const toggleForm = () => {
     setShowForm(!showForm)
   }
-  console.log(tasks)
   return (
-    <div className='category openTasks'>
-      <div className='header'>
-        <h1>Open Tasks</h1>
-        <div className='number'>{tasks.filter(task=>task.status==='open').length}</div>
-      </div>
-      {tasks.length > 0 ? tasks.filter(task => task.status === 'open').map(task =>
-        <Task task={task} deleteTask={deleteTask} selectTask={selectTask} />) : 'no open tasks'}
+    <div className='category open'>
+      {tasks.filter(task => task.status === 'open').map(task =>
+        <Task task={task} deleteTask={deleteTask} selectTask={selectTask} key={task.id}/>)}
 
-      <button onClick={toggleForm} className='btn round'>+</button>
+      <button onClick={toggleForm} className='round'><span className='center'><FaPlus size={20} /></span></button>
       {showForm && <AddTask addTask={addTask} hideForm={toggleForm} />}
     </div>
   )

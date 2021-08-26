@@ -1,9 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 /* SCSS HEX */
-$eggshell: #faf3ddff;
-$laurel-green: #c8d5b9ff;
-$cambridge-blue: #8fc0a9ff;
-$green-sheen: #68b0abff;
-$amazon: #4a7c59ff;
+// $eggshell: #faf3ddff;
+// $laurel-green: #c8d5b9ff;
+// $cambridge-blue: #8fc0a9ff;
+// $cambridge-blue-dark: rgb(109, 165, 139);
+// $green-sheen: #68b0abff;
+// $green-sheen-dark: #599692;
+// $amazon: #649773;
+// $amazon-dark: #4a855d;
+
+$open: #de8971;
+$running: #7b6079;
+$finished: #a7d0cd;
+$open-dark: #cf755b;
+$running-dark: #6d506b;
+$finished-dark: #81b8b4;
+$task-bg: #ffe9d6;
+$font-dark: #515e63;
+$time: rgb(231, 152, 5);
+$delete: rgb(224, 62, 62);
+$tab-header-open: #ffe9d6;
+$tab-header-running: #ffe9d6;
+$tab-header-finished: #404f55;
 
 * {
   padding: 0;
@@ -11,123 +29,117 @@ $amazon: #4a7c59ff;
   box-sizing: border-box;
 }
 body {
-  font-family: monospace;
+  font-family: "Roboto", sans-serif;
   text-align: center;
+  color: $font-dark;
+}
+.tabs {
+  display: none;
+  width: 100%;
 }
 .app {
-  height: 100vh;
-}
-
-.categories {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  height: 100%;
+  > div {
+    width: 33.33%;
+  }
 }
 .category {
-  width: 33.33%;
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: $eggshell;
-    padding: 0.4em 1em;
-  }
-  h1 {
-    font-size: 1.5em;
-  }
-  .number{
-    font-size: 1.4em;
-    font-weight: 600;
-  }
+  height: 100%;
+  min-height: 100vh;
+  padding: 0.01em;
 }
 
-.openTasks {
-  background-color: rgba(143, 192, 169, 0.822);
-  .header {
-    background-color: $cambridge-blue;
-  }
-  .select-btn {
-    background-color: $green-sheen;
-  }
-  .round {
-    color: initial;
-    display: inline-block;
-    background-color: $eggshell;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.7em;
-    font-weight: 600;
-  }
-  .add-form {
-    text-align: left;
-    margin: 1em 3em;
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    input {
-      background-color: transparent;
-      width: 100%;
-      margin-bottom: 0.7em;
-      margin-left: 1em;
-      padding: 0.5em 0.3em;
-      border: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.219);
-      outline: none;
-    }
-    input:focus {
-      border-bottom-color: rgba(0, 0, 0, 0.411);
-    }
-    button {
-      color: initial;
-    }
+//desktop headers
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7em 1em;
+  .icon {
+    margin-right: 15px;
   }
 }
-.runningTasks {
-  background-color: rgba(104, 176, 171, 0.733);
-  .header {
-    background-color: $green-sheen;
-  }
-  .finished-btn {
-    background-color: $amazon;
-  }
-  .stopped-btn {
-    background-color: rgba(143, 192, 169, 0.822);
-  }
+.number {
+  font-size: 1.4em;
+  font-weight: 600;
 }
-.finishedTasks {
-  background-color: rgb(97, 163, 117);
-  .header {
-    background-color: $amazon;
+.header-open {
+  background-color: $open-dark;
+  color: $tab-header-open;
+}
+.open {
+  background-color: $open;
+}
+.header-running {
+  background-color: $running-dark;
+  color: $tab-header-running;
+}
+//end of desktop headers
+.running {
+  background-color: $running;
+}
+.header-finished {
+  background-color: $finished-dark;
+  color: $tab-header-finished;
+}
+.finished {
+  background-color: $finished;
+}
+
+.add-form {
+  text-align: left;
+  margin: 1em 2em;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  input {
+    font-size: 16px;
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 0.7em;
+    margin-left: 1em;
+    padding: 0.5em 0.3em;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.219);
+    outline: none;
+  }
+  input:focus {
+    border-bottom-color: rgba(0, 0, 0, 0.411);
+  }
+  ::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.61);
+  }
+  button {
+    background-color: $task-bg;
+    color: $font-dark;
   }
 }
 
 .task {
-  background-color: $eggshell;
+  background-color: $task-bg;
   padding: 1em 1.5em;
   margin: 1em;
   border-radius: 10px;
   text-align: left;
+  font-weight: 600;
   h3,
   p {
     margin-bottom: 0.5em;
-  }
-  h3 {
-    font-size: 17px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: .9em;
   }
   .details {
-    opacity: 0.8;
+    opacity: 0.6;
+    line-height: 1.3;
   }
   .time {
     display: flex;
     align-items: flex-start;
-    color: orange;
-    font-size: 0.9em;
+    color: $time;
+    font-size: 0.8em;
     margin-bottom: 0;
     margin-top: 1.5em;
     font-weight: 600;
@@ -135,41 +147,113 @@ body {
       margin-left: 0.3em;
     }
   }
-  .down-icon {
-    display: inline;
-    text-align: center;
-    color: initial;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  .down-icon:hover {
-    opacity: 0.8;
-  }
-
-  .task-footer {
+ 
+ .task-footer {
     margin-top: 0.5em;
     display: flex;
     justify-content: space-between;
+    button {
+      display: inline-flex;
+      align-items: center;
+    }
   }
 }
 
+//mobile
+@media screen and (max-width: 700px) {
+  .app {
+    display: none;
+  }
+  .tabs {
+    display: block;
+  }
+}
+.tab {
+  padding: 1em 7px;
+  text-align: center;
+  font-weight: 600;
+  .tab-header {
+    font-size: .9em;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    .icon {
+      margin-right: 6px;
+    }
+    @media screen and (max-width: 360px) {
+      .icon {
+        margin-right: 4px;
+      }
+    }
+  }
+}
+.tab:first-child {
+  background-color: $open;
+  width: 32%;
+  color: $tab-header-open;
+}
+.tab:nth-child(2) {
+  background-color: $running;
+  width: 34%;
+  color: $tab-header-running;
+}
+.tab:nth-child(3) {
+  color: $tab-header-finished;
+  background-color: $finished;
+  width: 34%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  margin-right: 0.2em;
+}
+//end of mobile
+
+//buttons
 button {
   letter-spacing: 1px;
-  color: $eggshell;
-  padding: 0.5em 0.8em;
-  font-size: 10px;
+  color: $task-bg;
+  padding: 0.4em 0.8em;
+  font-size: 11px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
-  display: block;
 }
 button:hover {
   opacity: 0.8;
 }
 button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
   margin-top: 1em;
 }
 .delete-btn {
-  background-color: rgb(224, 62, 62);
+  background-color: $delete;
 }
+.finished-btn {
+  background-color: #5e9e9a;
+}
+.stopped-btn {
+  background-color: #c0674f;
+}
+.select-btn {
+  background-color: $running-dark;
+}
+.round {
+  color: $font-dark;
+  display: inline-block;
+  background-color: $task-bg;
+  padding: 0;
+  margin: 0.5em auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.7em;
+  font-weight: 600;
+}
+//end of buttons
