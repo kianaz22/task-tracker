@@ -6,11 +6,9 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 
 import Tabs from "./components/Tabs"
 import Tab from "./components/Tab"
-import OpenTasks from './components/OpenTasks'
-import RunningTasks from './components/RunningTasks'
-import FinishedTasks from './components/FinishedTasks'
 import Header from './components/Header'
 import TabHeader from './components/TabHeader'
+import Category from './components/Category'
 const defaultTasks = [
 {id: 1, text: 'Site configuration', details: 'Configure the site on the internal clients production environment',time: 'Jan 4th', status: 'open'}, 
 { id: 2, text: 'New feature', details: 'Add the pop-up promotion feature', time: 'Jan 15th', status: 'open' },
@@ -37,39 +35,21 @@ function App() {
   }, [tasks]);
 
   const addTask = (text, details, time) => {
-    // console.log('appAddTask', text)
     const id = Math.floor(Math.random() * 5000)
     const newTask = { id, text, details, time, status: 'open' }
     setTasks(tasks => [...tasks, newTask])
   }
   const deleteTask = (id) => {
-    // console.log('deleteTask', id)
     setTasks(tasks.filter(task => task.id !== id))
   }
   const changeStatus = (id,newStatus) => {
-    // console.log('selectTask', id)
     setTasks(tasks.map(task => {
       if (task.id === id)
         task.status = newStatus;
       return task;
     }))
   }
-  // const stoppedTask = (id) => {
-  //   // console.log('stoppedTask', id)
-  //   setTasks(tasks => tasks.map(task => {
-  //     if (task.id === id)
-  //       task.status = 'open';
-  //     return task;
-  //   }))
-  // }
-  // const finishedTask = (id) => {
-  //   // console.log('finishedTask', id)
-  //   setTasks(tasks => tasks.map(task => {
-  //     if (task.id === id)
-  //       task.status = 'finished';
-  //     return task;
-  //   }))
-  // }
+
   const getLength = (category) => {
     return tasks.filter(task => task.status === category).length
   }
@@ -79,28 +59,28 @@ function App() {
       <div className="app">
         <div>
           <Header category='open' getLength={getLength} icon={<HiLightBulb size={18} />} />
-          <OpenTasks tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
+          <Category category='open' tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
         </div>
         <div>
           <Header category='running' getLength={getLength} icon={<BsFillGearFill size={16} />} />
-          <RunningTasks tasks={tasks} changeStatus={changeStatus} />
+          <Category category='running' tasks={tasks} changeStatus={changeStatus} />
         </div>
         <div>
           <Header category='finished' getLength={getLength} icon={<AiFillCheckCircle size={18} />} />
-          <FinishedTasks tasks={tasks} deleteTask={deleteTask} />
+          <Category category='finished' tasks={tasks} deleteTask={deleteTask} />
         </div>
       </div>
 
       <div className='tabs'>
         <Tabs>
           <Tab value="1" header={<TabHeader icon={<HiLightBulb />} category='open' getLength={getLength} />}>
-            <OpenTasks tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
+          <Category category='open' tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
           </Tab>
           <Tab value="2" header={<TabHeader icon={<BsFillGearFill />} category='running' getLength={getLength} />}>
-            <RunningTasks tasks={tasks} changeStatus={changeStatus} />
+          <Category category='running' tasks={tasks} changeStatus={changeStatus} />
           </Tab>
           <Tab value="3" header={<TabHeader icon={<AiFillCheckCircle size={18} />} category='finished' getLength={getLength} />}>
-            <FinishedTasks tasks={tasks} deleteTask={deleteTask} />
+          <Category category='finished' tasks={tasks} deleteTask={deleteTask} />
           </Tab>
         </Tabs>
       </div>
