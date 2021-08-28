@@ -33,11 +33,11 @@ body {
   text-align: center;
   color: $font-dark;
 }
-.tabs {
+.small-visible {
   display: none;
   width: 100%;
 }
-.app {
+.large-visible {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -161,10 +161,10 @@ body {
 
 //mobile
 @media screen and (max-width: 700px) {
-  .app {
+  .large-visible {
     display: none;
   }
-  .tabs {
+  .small-visible {
     display: block;
   }
 }

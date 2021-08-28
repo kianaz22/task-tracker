@@ -56,7 +56,7 @@ function App() {
   return (
     <div>
 
-      <div className="app">
+      <div className="large-visible">
         <div>
           <Header category='open' getLength={getLength} icon={<HiLightBulb size={18} />} />
           <Category category='open' tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
@@ -71,7 +71,7 @@ function App() {
         </div>
       </div>
 
-      <div className='tabs'>
+      <div className='small-visible'>
         <Tabs>
           <Tab value="1" header={<TabHeader icon={<HiLightBulb />} category='open' getLength={getLength} />}>
           <Category category='open' tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
