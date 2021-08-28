@@ -6,7 +6,7 @@ const FinishedTasks = ({ tasks, deleteTask }) => {
     <div className='category finished'>
       
       {tasks.filter(task => task.status === 'finished').map(task =>
-        <Task task={task} deleteTask={deleteTask} key={task.id}/>)}
+        <Task task={task} status='finished' deleteTask={deleteTask} key={task.id}/>)}
     </div>
   )
 }

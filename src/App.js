@@ -46,30 +46,30 @@ function App() {
     // console.log('deleteTask', id)
     setTasks(tasks.filter(task => task.id !== id))
   }
-  const selectTask = (id) => {
+  const changeStatus = (id,newStatus) => {
     // console.log('selectTask', id)
     setTasks(tasks.map(task => {
       if (task.id === id)
-        task.status = 'running';
+        task.status = newStatus;
       return task;
     }))
   }
-  const stoppedTask = (id) => {
-    // console.log('stoppedTask', id)
-    setTasks(tasks => tasks.map(task => {
-      if (task.id === id)
-        task.status = 'open';
-      return task;
-    }))
-  }
-  const finishedTask = (id) => {
-    // console.log('finishedTask', id)
-    setTasks(tasks => tasks.map(task => {
-      if (task.id === id)
-        task.status = 'finished';
-      return task;
-    }))
-  }
+  // const stoppedTask = (id) => {
+  //   // console.log('stoppedTask', id)
+  //   setTasks(tasks => tasks.map(task => {
+  //     if (task.id === id)
+  //       task.status = 'open';
+  //     return task;
+  //   }))
+  // }
+  // const finishedTask = (id) => {
+  //   // console.log('finishedTask', id)
+  //   setTasks(tasks => tasks.map(task => {
+  //     if (task.id === id)
+  //       task.status = 'finished';
+  //     return task;
+  //   }))
+  // }
   const getLength = (category) => {
     return tasks.filter(task => task.status === category).length
   }
@@ -79,11 +79,11 @@ function App() {
       <div className="app">
         <div>
           <Header category='open' getLength={getLength} icon={<HiLightBulb size={18} />} />
-          <OpenTasks tasks={tasks} addTask={addTask} selectTask={selectTask} deleteTask={deleteTask} />
+          <OpenTasks tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
         </div>
         <div>
           <Header category='running' getLength={getLength} icon={<BsFillGearFill size={16} />} />
-          <RunningTasks tasks={tasks} finishedTask={finishedTask} stoppedTask={stoppedTask} />
+          <RunningTasks tasks={tasks} changeStatus={changeStatus} />
         </div>
         <div>
           <Header category='finished' getLength={getLength} icon={<AiFillCheckCircle size={18} />} />
@@ -94,10 +94,10 @@ function App() {
       <div className='tabs'>
         <Tabs>
           <Tab value="1" header={<TabHeader icon={<HiLightBulb />} category='open' getLength={getLength} />}>
-            <OpenTasks tasks={tasks} addTask={addTask} selectTask={selectTask} deleteTask={deleteTask} />
+            <OpenTasks tasks={tasks} addTask={addTask} changeStatus={changeStatus} deleteTask={deleteTask} />
           </Tab>
           <Tab value="2" header={<TabHeader icon={<BsFillGearFill />} category='running' getLength={getLength} />}>
-            <RunningTasks tasks={tasks} finishedTask={finishedTask} stoppedTask={stoppedTask} />
+            <RunningTasks tasks={tasks} changeStatus={changeStatus} />
           </Tab>
           <Tab value="3" header={<TabHeader icon={<AiFillCheckCircle size={18} />} category='finished' getLength={getLength} />}>
             <FinishedTasks tasks={tasks} deleteTask={deleteTask} />
