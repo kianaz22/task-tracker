@@ -24,7 +24,7 @@ function App() {
   const [tasks, setTasks] = useState(defaultTasks)
 
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem('storedTasks'));
+    const storedTasks = JSON.parse(localStorage.getItem('storedTasks')) || [];
 
     if (storedTasks.length>0) {
       setTasks(storedTasks);
