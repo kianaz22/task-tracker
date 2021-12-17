@@ -3,7 +3,6 @@ import { HiLightBulb } from 'react-icons/hi'
 import { BsFillGearFill } from 'react-icons/bs'
 import { AiFillCheckCircle } from 'react-icons/ai'
 
-
 import Tabs from "./components/Tabs"
 import Tab from "./components/Tab"
 import Header from './components/Header'
@@ -55,7 +54,6 @@ function App() {
   }
   return (
     <div>
-
       <div className="large-visible">
         <div>
           <Header category='open' getLength={getLength} icon={<HiLightBulb size={18} />} />
@@ -67,7 +65,7 @@ function App() {
         </div>
         <div>
           <Header category='finished' getLength={getLength} icon={<AiFillCheckCircle size={18} />} />
-          <Category category='finished' tasks={tasks} deleteTask={deleteTask} />
+          <Category category='finished' tasks={tasks} deleteTask={deleteTask} changeStatus={changeStatus} />
         </div>
       </div>
 
