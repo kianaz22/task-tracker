@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useDrag } from "react-dnd";
 import { FaArrowLeft, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
+import { GlobalContext } from "../context/GlobalState.js";
 
-const Task = ({ task, deleteTask, changeStatus }) => {
+const Task = ({ task }) => {
+  const { changeStatus, deleteTask } = useContext(GlobalContext);
+
   const [details, setDetails] = useState(true);
   const toggleDetails = () => {
     setDetails(!details);
@@ -25,7 +28,7 @@ const Task = ({ task, deleteTask, changeStatus }) => {
         <p>{task.time}</p>
       </div>
       <div className="task-footer">
-        {deleteTask && (
+        {status !== "running" && (
           <button className="delete-btn" onClick={() => deleteTask(task.id)}>
             delete
           </button>

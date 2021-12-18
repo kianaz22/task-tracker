@@ -1,12 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useDrop } from "react-dnd";
 import { FaPlus } from "react-icons/fa";
 import AddTask from "./AddTask";
 import Task from "./Task";
+import { GlobalContext } from "../context/GlobalState.js";
 
-const Category = ({ category, tasks, addTask, changeStatus, deleteTask }) => {
+const Category = ({ category }) => {
+  const { tasks, changeStatus } = useContext(GlobalContext);
+
   const [showForm, setShowForm] = useState(false);
+
   const toggleForm = () => {
     setShowForm(!showForm);
   };
@@ -48,12 +52,7 @@ const Category = ({ category, tasks, addTask, changeStatus, deleteTask }) => {
       {tasks
         .filter(task => task.status === category)
         .map(task => (
-          <Task
-            task={task}
-            deleteTask={deleteTask}
-            changeStatus={changeStatus}
-            key={task.id}
-          />
+          <Task task={task} key={task.id} />
         ))}
 
       {category === "open" && (
@@ -63,9 +62,7 @@ const Category = ({ category, tasks, addTask, changeStatus, deleteTask }) => {
           </span>
         </button>
       )}
-      {category === "open" && showForm && (
-        <AddTask addTask={addTask} hideForm={toggleForm} />
-      )}
+      {category === "open" && showForm && <AddTask hideForm={toggleForm} />}
     </div>
   );
 };
