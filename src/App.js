@@ -5,14 +5,17 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 import Tabs from "./components/Tabs";
 import Tab from "./components/Tab";
-import Header from "./components/Header";
 import TabHeader from "./components/TabHeader";
 import Category from "./components/Category";
 import { GlobalContext } from "./context/GlobalState.js";
 
 function App() {
   const { tasks, loadTasks } = useContext(GlobalContext);
-
+  const categories = [
+    { category: "open", icon: <HiLightBulb size={18} /> },
+    { category: "running", icon: <BsFillGearFill size={16} /> },
+    { category: "finished", icon: <AiFillCheckCircle size={18} /> },
+  ];
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("storedTasks")) || [];
 
@@ -28,45 +31,22 @@ function App() {
   return (
     <div>
       <div className="large-visible">
-        <div>
-          <Header category="open" icon={<HiLightBulb size={18} />} />
-          <Category category="open" />
-        </div>
-        <div>
-          <Header category="running" icon={<BsFillGearFill size={16} />} />
-          <Category category="running" />
-        </div>
-        <div>
-          <Header category="finished" icon={<AiFillCheckCircle size={18} />} />
-          <Category category="finished" />
-        </div>
+        {categories.map((cat, index) => (
+          <Category key={index} category={cat.category} icon={cat.icon} />
+        ))}
       </div>
 
       <div className="small-visible">
         <Tabs>
-          <Tab
-            value="1"
-            header={<TabHeader icon={<HiLightBulb />} category="open" />}
-          >
-            <Category category="open" />
-          </Tab>
-          <Tab
-            value="2"
-            header={<TabHeader icon={<BsFillGearFill />} category="running" />}
-          >
-            <Category category="running" />
-          </Tab>
-          <Tab
-            value="3"
-            header={
-              <TabHeader
-                icon={<AiFillCheckCircle size={18} />}
-                category="finished"
-              />
-            }
-          >
-            <Category category="finished" />
-          </Tab>
+          {categories.map((cat, index) => (
+            <Tab
+              key={index}
+              value={String(index + 1)}
+              header={<TabHeader icon={cat.icon} category={cat.category} />}
+            >
+              <Category category={cat.category} tab={true} />
+            </Tab>
+          ))}
         </Tabs>
       </div>
     </div>

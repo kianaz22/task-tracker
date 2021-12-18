@@ -21,7 +21,6 @@ const AddTask = ({ hideForm }) => {
       hideForm();
       const id = Math.floor(Math.random() * 1000);
       const task = { id, text, details, time,status:'open' };
-      console.log("task: ", task);
       addTask(task);
       setText("");
       setTime("");

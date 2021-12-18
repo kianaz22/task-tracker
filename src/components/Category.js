@@ -5,8 +5,9 @@ import { FaPlus } from "react-icons/fa";
 import AddTask from "./AddTask";
 import Task from "./Task";
 import { GlobalContext } from "../context/GlobalState.js";
+import Header from "./Header";
 
-const Category = ({ category }) => {
+const Category = ({ category, tab }) => {
   const { tasks, changeStatus } = useContext(GlobalContext);
 
   const [showForm, setShowForm] = useState(false);
@@ -44,6 +45,8 @@ const Category = ({ category }) => {
   });
 
   return (
+    <div>
+    {!tab && <Header category={category} />}
     <div
       className={`category ${category}`}
       ref={drop}
@@ -63,6 +66,7 @@ const Category = ({ category }) => {
         </button>
       )}
       {category === "open" && showForm && <AddTask hideForm={toggleForm} />}
+    </div>
     </div>
   );
 };
