@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState.js";
 
-const Header = ({ category, icon }) => {
+const Header = ({ category, icon, tab }) => {
   const { tasks } = useContext(GlobalContext);
 
   const getLength = category => {
@@ -11,13 +11,17 @@ const Header = ({ category, icon }) => {
   const capitalize = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
   return (
-    <div className={`header header-${category}`}>
-      <h3 className="center">
-        <span className="center icon">{icon}</span>
-        <span>{capitalize(category)} Tasks</span>
-      </h3>
-      <div className="number">{getLength(category)}</div>
+    <div className={tab ? "tab-header" : `header header-${category}`}>
+      <div className="center">
+        <div className="center icon">{icon}</div>
+        <span style={!tab ? { fontSize: "1.1em", fontWeight: "600" } : {}}>
+          {capitalize(category)}
+          {!tab && " Tasks"}
+        </span>
+      </div>
+      <div className={!tab && "number"}>{getLength(category)}</div>
     </div>
   );
 };

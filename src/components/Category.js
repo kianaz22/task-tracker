@@ -7,7 +7,7 @@ import Task from "./Task";
 import { GlobalContext } from "../context/GlobalState.js";
 import Header from "./Header";
 
-const Category = ({ category, tab }) => {
+const Category = ({ category, tab, icon }) => {
   const { tasks, changeStatus } = useContext(GlobalContext);
 
   const [showForm, setShowForm] = useState(false);
@@ -46,7 +46,7 @@ const Category = ({ category, tab }) => {
 
   return (
     <div>
-    {!tab && <Header category={category} />}
+    {!tab && <Header category={category} icon={icon} />}
     <div
       className={`category ${category}`}
       ref={drop}

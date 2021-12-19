@@ -5,7 +5,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 import Tabs from "./components/Tabs";
 import Tab from "./components/Tab";
-import TabHeader from "./components/TabHeader";
+import Header from "./components/Header";
 import Category from "./components/Category";
 import { GlobalContext } from "./context/GlobalState.js";
 
@@ -42,7 +42,9 @@ function App() {
             <Tab
               key={index}
               value={String(index + 1)}
-              header={<TabHeader icon={cat.icon} category={cat.category} />}
+              header={
+                <Header icon={cat.icon} category={cat.category} tab={true} />
+              }
             >
               <Category category={cat.category} tab={true} />
             </Tab>
