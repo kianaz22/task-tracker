@@ -46,23 +46,24 @@ body {
 //desktop headers
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0.7em 1em;
+  padding: 0.5em 1em;
+  margin: 0 1em;
+  border-radius: 2px;
   .icon {
     margin-right: 15px;
   }
 }
 .number {
-  font-size: 1.2em;
   font-weight: 600;
+  margin-left: 1em;
 }
 .header-open {
   background-color: $open-dark;
   color: $font-light;
 }
 .open {
-  background-color: $open;
   h3{
     background-color:$open-medium ;
   }
@@ -73,7 +74,6 @@ body {
 }
 //end of desktop headers
 .running {
-  background-color: $running;
   h3{
     background-color:$running-medium ;
   }
@@ -83,10 +83,18 @@ body {
   color: $font-light;
 }
 .finished {
-  background-color: $finished;
   h3{
     background-color:$finished-medium ;
   }
+}
+ .open .task{
+  border: 2px solid $open-medium;
+}
+.running .task{
+  border: 2px solid $running-medium;
+}
+.finished .task{
+  border: 2px solid $finished-medium;
 }
 
 .add-form {
@@ -115,13 +123,12 @@ body {
     color: rgba(0, 0, 0, 0.61);
   }
   button {
-    background-color: $task-bg;
-    color: $font-dark;
+    background-color: $open-dark;
+    color: $font-light;
   }
 }
 
 .task {
-  background-color: $task-bg;
   padding-bottom: 1em ;
   margin: 1em;
   border-radius: 10px;
@@ -132,8 +139,6 @@ body {
     font-size: .95em;
     padding-top:.6em ;
     padding-bottom:.6em ;
-    border-top-right-radius:10px ;
-    border-top-left-radius:10px ;
     margin-bottom: 0.7em;
   }
   p {
@@ -141,7 +146,7 @@ body {
     font-size: .9em;
   }
   .details {
-    opacity: 0.6;
+    opacity: 0.8;
     line-height: 1.3;
   }
   .time {
@@ -258,8 +263,9 @@ button[type="submit"] {
 }
 .round {
   color: $font-dark;
+  border: 2px solid $font-dark;
+  background-color: transparent;
   display: inline-block;
-  background-color: $task-bg;
   padding: 0;
   margin: 0.5em auto;
   width: 40px;

@@ -16,7 +16,7 @@ const Header = ({ category, icon, tab }) => {
     <div className={tab ? "tab-header" : `header header-${category}`}>
       <div className="center">
         <div className="center icon">{icon}</div>
-        <span style={!tab ? { fontSize: "1.1em", fontWeight: "600" } : {}}>
+        <span style={!tab ? { fontWeight: "600" } : {}}>
           {capitalize(category)}
           {!tab && " Tasks"}
         </span>
