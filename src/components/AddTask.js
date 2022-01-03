@@ -1,14 +1,15 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { FaPen } from "react-icons/fa";
 import { BsFillCaretRightFill } from "react-icons/bs";
-import { GlobalContext } from "../context/GlobalState.js";
+import { useDispatch } from "react-redux";
+import { ADD_TASK } from "../js/constants/action-types";
 
 const AddTask = ({ hideForm }) => {
   const [text, setText] = useState("");
   const [time, setTime] = useState("");
   const [details, setDetails] = useState("");
 
-  const { addTask } = useContext(GlobalContext);
+  const dispatch = useDispatch();
 
   const onSubmit = e => {
     e.preventDefault();
@@ -20,8 +21,8 @@ const AddTask = ({ hideForm }) => {
     } else {
       hideForm();
       const id = Math.floor(Math.random() * 1000);
-      const task = { id, text, details, time,status:'open' };
-      addTask(task);
+      const task = { id, text, details, time, status: "open" };
+      dispatch({ type: ADD_TASK, payload: task });
       setText("");
       setTime("");
       setDetails("");

@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../context/GlobalState.js";
+import { useSelector } from "react-redux";
 
 const Header = ({ category, icon, tab }) => {
-  const { tasks } = useContext(GlobalContext);
+  const tasks = useSelector(state => state.tasks);
 
   const getLength = category => {
     return tasks.filter(task => task.status === category).length;

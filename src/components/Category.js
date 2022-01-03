@@ -1,15 +1,16 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useDrop } from "react-dnd";
 import { FaPlus } from "react-icons/fa";
 import AddTask from "./AddTask";
 import Task from "./Task";
-import { GlobalContext } from "../context/GlobalState.js";
 import Header from "./Header";
+import { useDispatch, useSelector } from "react-redux";
+import { CHANGE_STATUS } from "../js/constants/action-types";
 
 const Category = ({ category, tab, icon }) => {
-  const { tasks, changeStatus } = useContext(GlobalContext);
-
+  const tasks = useSelector(state => state.tasks);
+  const dispatch = useDispatch();
   const [showForm, setShowForm] = useState(false);
 
   const toggleForm = () => {
@@ -40,33 +41,33 @@ const Category = ({ category, tab, icon }) => {
 
         return;
       }
-      changeStatus(dragItem.id, category);
+      dispatch({ type: CHANGE_STATUS, payload: { id: dragItem.id, category } });
     },
   });
 
   return (
     <div>
-    {!tab && <Header category={category} icon={icon} />}
-    <div
-      className={`category ${category}`}
-      ref={drop}
-      opacity={isOver ? "0.5" : "1"}
-    >
-      {tasks
-        .filter(task => task.status === category)
-        .map(task => (
-          <Task task={task} key={task.id} />
-        ))}
+      {!tab && <Header category={category} icon={icon} />}
+      <div
+        className={`category ${category}`}
+        ref={drop}
+        opacity={isOver ? "0.5" : "1"}
+      >
+        {tasks
+          .filter(task => task.status === category)
+          .map(task => (
+            <Task task={task} key={task.id} />
+          ))}
 
-      {category === "open" && (
-        <button onClick={toggleForm} className="round">
-          <span className="center">
-            <FaPlus size={20} />
-          </span>
-        </button>
-      )}
-      {category === "open" && showForm && <AddTask hideForm={toggleForm} />}
-    </div>
+        {category === "open" && (
+          <button onClick={toggleForm} className="round">
+            <span className="center">
+              <FaPlus size={20} />
+            </span>
+          </button>
+        )}
+        {category === "open" && showForm && <AddTask hideForm={toggleForm} />}
+      </div>
     </div>
   );
 };

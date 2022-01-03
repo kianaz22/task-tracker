@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import { FaArrowLeft, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
-import { GlobalContext } from "../context/GlobalState.js";
+import { useDispatch } from "react-redux";
+import { DELETE_TASK, CHANGE_STATUS } from "../js/constants/action-types";
 
 const Task = ({ task }) => {
-  const { changeStatus, deleteTask } = useContext(GlobalContext);
+  const dispatch = useDispatch();
 
   const [details, setDetails] = useState(true);
   const toggleDetails = () => {
@@ -29,14 +30,22 @@ const Task = ({ task }) => {
       </div>
       <div className="task-footer">
         {status !== "running" && (
-          <button className="delete-btn" onClick={() => deleteTask(task.id)}>
+          <button
+            className="delete-btn"
+            onClick={() => dispatch({ type: DELETE_TASK, payload: task.id })}
+          >
             delete
           </button>
         )}
         {status === "open" && (
           <button
             className="select-btn"
-            onClick={() => changeStatus(task.id, "running")}
+            onClick={() =>
+              dispatch({
+                type: CHANGE_STATUS,
+                payload: { id: task.id, category: "running" },
+              })
+            }
           >
             select&nbsp;
             <FaArrowRight />
@@ -45,7 +54,12 @@ const Task = ({ task }) => {
         {status === "running" && (
           <button
             className="stopped-btn"
-            onClick={() => changeStatus(task.id, "open")}
+            onClick={() =>
+              dispatch({
+                type: CHANGE_STATUS,
+                payload: { id: task.id, category: "open" },
+              })
+            }
           >
             <FaArrowLeft />
             &nbsp;stopped
@@ -54,7 +68,12 @@ const Task = ({ task }) => {
         {status === "running" && (
           <button
             className="finished-btn"
-            onClick={() => changeStatus(task.id, "finished")}
+            onClick={() =>
+              dispatch({
+                type: CHANGE_STATUS,
+                payload: { id: task.id, category: "finished" },
+              })
+            }
           >
             finished&nbsp;
             <FaArrowRight />

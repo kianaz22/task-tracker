@@ -1,4 +1,5 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { HiLightBulb } from "react-icons/hi";
 import { BsFillGearFill } from "react-icons/bs";
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -7,10 +8,12 @@ import Tabs from "./components/Tabs";
 import Tab from "./components/Tab";
 import Header from "./components/Header";
 import Category from "./components/Category";
-import { GlobalContext } from "./context/GlobalState.js";
+import { LOAD_TASKS } from "./js/constants/action-types";
 
 function App() {
-  const { tasks, loadTasks } = useContext(GlobalContext);
+  const tasks = useSelector(state => state.tasks);
+  const dispatch = useDispatch();
+
   const categories = [
     { category: "open", icon: <HiLightBulb size={18} /> },
     { category: "running", icon: <BsFillGearFill size={16} /> },
@@ -20,7 +23,7 @@ function App() {
     const storedTasks = JSON.parse(localStorage.getItem("storedTasks")) || [];
 
     if (storedTasks.length > 0) {
-      loadTasks(storedTasks);
+      dispatch({ type: LOAD_TASKS, payload: storedTasks });
     }
   }, []);
 
