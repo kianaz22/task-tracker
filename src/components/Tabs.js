@@ -5,7 +5,7 @@ import _ from "underscore";
 export default class Tabs extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '1' };
+    this.state = { value: "1" };
   }
 
   isSelected(tab) {
@@ -24,26 +24,26 @@ export default class Tabs extends Component {
         : tabHeaderStyle;
 
       return (
-        <span className='tab'
+        <span
+          className="tab"
           key={tab.props.value}
           onClick={e => this.selectTab(e, tab.props.value)}
-          style={i === 0 ? style : Object.assign({}, style)}>
+          style={i === 0 ? style : Object.assign({}, style)}
+        >
           {tab.props.header}
         </span>
       );
     });
   }
-  
+
   render() {
     const { children } = this.props;
     const tabs = Children.toArray(children);
 
     return (
       <div>
-        <div style={tabsHeaderStyle}>
-          {this.getHeader(tabs)}
-        </div>
-        <div style={{borderTop:'none'}}>
+        <div style={tabsHeaderStyle}>{this.getHeader(tabs)}</div>
+        <div style={{ borderTop: "none" }}>
           {_.find(tabs, tab => this.isSelected(tab))}
         </div>
       </div>
@@ -52,33 +52,33 @@ export default class Tabs extends Component {
 }
 
 Tabs.defaultProps = {
-  onChange: _.noop
+  onChange: _.noop,
 };
 
 Tabs.propTypes = {
   children: PropTypes.node,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 // Style
 
-
 const tabsHeaderStyle = {
   display: "flex",
-  overflow: "hidden"
+  overflow: "hidden",
+  position: "fixed",
+  top: "0",
+  width: "100%",
+  "z-index": "1",
 };
 
 const tabHeaderStyle = {
-  padding: "1em 7px",
+  padding: "0.6em 7px",
   textAlign: "center",
-  fontWeight: '600',
-  letterSpacing:'1px',
-  transition: 'all .3s'
+  fontWeight: "600",
+  letterSpacing: "1px",
+  transition: "all .3s",
 };
 
 const activeTabHeaderStyle = Object.assign({}, tabHeaderStyle, {
   borderBottom: "none",
 });
-
-
-
